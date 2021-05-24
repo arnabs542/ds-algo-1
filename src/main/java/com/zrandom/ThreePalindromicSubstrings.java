@@ -110,7 +110,7 @@ public class ThreePalindromicSubstrings {
 
     public static void main(String[] args) {
         List<String> ans = threePalindromicSubstrings("hhhiggxc");
-        System.out.println(ans.toString());
+        System.out.println(ans);
     }
 
     static class TrieNode {
