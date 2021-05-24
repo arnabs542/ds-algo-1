@@ -50,10 +50,7 @@ public class MergeIntervals {
     }
 
     private boolean checkIfOverlapping(Interval interval1, Interval interval2) {
-        if (interval2.start <= interval1.end && interval1.start <= interval2.end) {
-            return true;
-        }
-        return false;
+        return interval2.start <= interval1.end && interval1.start <= interval2.end;
     }
 
     private Interval mergeTwoIntervals(Interval interval1, Interval interval2) {

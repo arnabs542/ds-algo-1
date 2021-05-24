@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class Sorted {
 
-    private static int p = 1000003;
+    private static final int p = 1000003;
     private static long[] fact;
     private static int[] ranks;
 
@@ -70,7 +70,7 @@ public class Sorted {
             ranks[A.charAt(i)]--;
         }
 
-        return (int) (sum + 1) % p;
+        return (sum + 1) % p;
     }
 
     public static void main(String[] args) {

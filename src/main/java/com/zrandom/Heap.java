@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Heap {
 
-    private int mod = 1000000007;
+    private final int mod = 1000000007;
 
     public int nchoc(int A, ArrayList<Integer> B) {
 
