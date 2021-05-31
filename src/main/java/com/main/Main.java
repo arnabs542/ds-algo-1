@@ -1,6 +1,6 @@
 package com.main;
 
-import com.graphs.v.TreeColoringWithThreeColors;
+import com.dsa.graphs.v.TreeColoringWithThreeColors;
 
 public class Main {
 
@@ -34,4 +34,8 @@ public class Main {
         t.solve("22000");
     }
 }
+
+
+
+
 
