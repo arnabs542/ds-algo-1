@@ -1,8 +1,9 @@
 package com.dsa.trees.i;
 
+import com.dsa.trees.common.TreeNode;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Deque;
 
 public class ZigZagLevelOrderTraversal {
@@ -27,44 +28,35 @@ public class ZigZagLevelOrderTraversal {
         boolean reverse = false;
         while (!deque.isEmpty()) {
 
-            TreeNode parent = deque.pollFirst();
+            TreeNode parent;
 
-            if (parent.left != null) {
-                deque.addLast(parent.left);
-            }
-            if (parent.right != null) {
-                deque.addLast(parent.right);
+            if (reverse) {
+                parent = deque.pollLast();
+                if (parent.right != null) {
+                    deque.addFirst(parent.right);
+                }
+                if (parent.left != null) {
+                    deque.addFirst(parent.left);
+                }
+            } else {
+                parent = deque.pollFirst();
+                if (parent.left != null) {
+                    deque.addLast(parent.left);
+                }
+                if (parent.right != null) {
+                    deque.addLast(parent.right);
+                }
             }
             level.add(parent.val);
 
             if (--size == 0) {
-                ArrayList<Integer> temp = new ArrayList<>(level);
-
-                if (reverse) {
-                    Collections.reverse(temp);
-                    reverse = false;
-                } else {
-                    reverse = true;
-                }
-                ans.add(temp);
+                reverse = !reverse;
+                ans.add(new ArrayList<>(level));
                 level.clear();
                 size = deque.size();
             }
         }
-
         return ans;
-    }
-
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-            left = null;
-            right = null;
-        }
     }
 }
 

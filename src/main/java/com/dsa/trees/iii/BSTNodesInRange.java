@@ -2,29 +2,26 @@ package com.dsa.trees.iii;
 
 import com.dsa.trees.common.TreeNode;
 
-import java.util.Stack;
-
 public class BSTNodesInRange {
 
     public int solve(TreeNode A, int B, int C) {
+        return count(A, B, C);
+    }
+
+    private int count(TreeNode root, int B, int C) {
+
+        if (root == null) {
+            return 0;
+        }
 
         int ans = 0;
 
-        //iterative inorder traversal
-        Stack<TreeNode> stack = new Stack<>(); //store visited elements, to print them later   L n R
-        TreeNode curr = A;
-
-        while (curr != null || !stack.empty()) {
-            if (curr != null) {
-                stack.push(curr);
-                curr = curr.left;  //keep going left
-            } else {
-                TreeNode temp = stack.pop(); //pop from stack and add to ans
-                if (temp.val >= B && temp.val <= C) {
-                    ans++;
-                }
-                curr = temp.right; //go right
-            }
+        if (root.val >= B && root.val <= C) {
+            ans = 1 + count(root.left, B, C) + count(root.right, B, C);
+        } else if (root.val > C) {
+            ans += count(root.left, B, C);
+        } else if (root.val < B) {
+            ans += count(root.right, B, C);
         }
         return ans;
     }

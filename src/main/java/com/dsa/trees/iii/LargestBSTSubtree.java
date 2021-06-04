@@ -18,15 +18,13 @@ public class LargestBSTSubtree {
         }
 
         Pair<Boolean, Integer, Integer, Integer> left = isBST(root.left);
+        Pair<Boolean, Integer, Integer, Integer> right = isBST(root.right);
 
-        if (left.isBst && left.max < root.val) { //if left subtree max less than current node
-
-            Pair<Boolean, Integer, Integer, Integer> right = isBST(root.right);
-
-            if (right.isBst && right.min > root.val) {//if right subtree min greater than current node
-                ans = Math.max(ans, left.size + right.size + 1);
-                return new Pair<>(true, Math.max(root.val, right.max), Math.min(root.val, left.min), left.size + right.size + 1);
-            }
+        if (left.isBst && left.max < root.val
+                && right.isBst && right.min > root.val) { //if left subtree max less than current node
+            ans = Math.max(ans, left.size + right.size + 1);
+            return new Pair<>(true, Math.max(root.val, right.max), Math.min(root.val, left.min),
+                    left.size + right.size + 1);
         }
         return new Pair<>(false, -1, -1, -1); //if not a bst, i dont care about min/max
     }
