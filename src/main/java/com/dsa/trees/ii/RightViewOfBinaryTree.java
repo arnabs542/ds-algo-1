@@ -22,8 +22,6 @@ public class RightViewOfBinaryTree {
         deque.add(root);
         int size = 1;
 
-        ArrayList<Integer> level = new ArrayList<>(); //all nodes of one level
-
         while (!deque.isEmpty()) {
 
             TreeNode parent = deque.pollFirst(); //for each pop, we are adding two more nodes to the queue
@@ -35,15 +33,11 @@ public class RightViewOfBinaryTree {
             if (parent.right != null) {
                 deque.addLast(parent.right);
             }
-            level.add(parent.val); //add current node to level array list
-
             if (--size == 0) {
-                ans.add(level.get(level.size() - 1)); //add the last one in the level to the ans, when size is 0
-                level.clear(); //clear for reuse
+                ans.add(parent.val); //add the last one in the level to the ans, when size is 0
                 size = deque.size(); //reset size to queue size
             }
         }
-
         return ans;
     }
 }

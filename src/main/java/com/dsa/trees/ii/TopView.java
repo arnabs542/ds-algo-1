@@ -12,7 +12,7 @@ public class TopView {
     private int max = Integer.MIN_VALUE;
     private int min = Integer.MAX_VALUE;
 
-    private HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+    private HashMap<Integer, Integer> map = new HashMap<>();
 
     public ArrayList<Integer> solve(TreeNode A) {
 
@@ -23,9 +23,8 @@ public class TopView {
         levelOrder(A); //do level order traversal, because lesser depth nodes have to appear first
 
         for (int i = min; i <= max; i++) { //no. of vertical  lines will be from min to max
-            ans.add(map.get(i).get(0)); //just pick the first one
+            ans.add(map.get(i)); //just pick the first one
         }
-
         return ans;
     }
 
@@ -49,9 +48,10 @@ public class TopView {
             }
 
             //update map with current node
-            ArrayList<Integer> values = map.getOrDefault(parent.verticalIndex, new ArrayList<>());
-            values.add(parent.node.val);
-            map.put(parent.verticalIndex, values);
+            Integer top = map.getOrDefault(parent.verticalIndex, -1);
+            if (top.equals(-1)) {
+                map.put(parent.verticalIndex, parent.node.val);
+            }
         }
     }
 

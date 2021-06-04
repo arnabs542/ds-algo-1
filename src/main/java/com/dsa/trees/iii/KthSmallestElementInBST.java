@@ -2,30 +2,28 @@ package com.dsa.trees.iii;
 
 import com.dsa.trees.common.TreeNode;
 
-import java.util.Stack;
+public class KthSmallestElementInBST {
 
-public class KthSmallestElementInTree {
+    private static int k;
 
     public int kthsmallest(TreeNode A, int B) {
+        k = B;
+        return recurse(A);
+    }
 
-        Stack<TreeNode> stack = new Stack<>(); //store visited elements, to print them later   L n R
-        TreeNode curr = A;
-
-        //iterative inorder traversal
-        while (curr != null || !stack.empty()) {
-            if (curr != null) {
-                stack.push(curr);
-                curr = curr.left;  //keep going left
-            } else {
-                TreeNode temp = stack.pop(); //pop from stack and add to ans
-                curr = temp.right; //go right
-
-                if (--B == 0) { //we have found Bth smallest element
-                    return temp.val;
-                }
-            }
+    private int recurse(TreeNode curr) {
+        if (curr == null) {
+            return -1;
         }
-        return -1;
+        int left = recurse(curr.left);
+
+        if (left != -1) {
+            return left; //left has B or more elements
+        }
+        if (--k == 0) {
+            return curr.val;
+        }
+        return recurse(curr.right); //left has less than B elements
     }
 }
 

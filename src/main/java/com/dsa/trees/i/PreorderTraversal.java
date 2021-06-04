@@ -26,6 +26,41 @@ public class PreorderTraversal {
         }
         return ans;
     }
+
+    // Morris preorder traversal
+    /*
+    private List<Integer> ans;
+    public List<Integer> preorderTraversal(TreeNode root) {
+        ans = new ArrayList<>();
+
+        TreeNode curr = root;
+        while (curr != null) {
+            if (curr.left != null) {
+                TreeNode pred = findPredecessor(curr);
+                if (pred.right == null) {
+                    pred.right = curr;
+                    ans.add(curr.val);
+                    curr = curr.left;
+                } else {
+                    pred.right = null;
+                    curr = curr.right;
+                }
+            } else {
+                ans.add(curr.val);
+                curr = curr.right;
+            }
+        }
+        return ans;
+    }
+
+    private TreeNode findPredecessor(TreeNode root) {
+        TreeNode curr = root.left;
+        while (curr.right != null && curr.right != root) { //if already not linked
+            curr = curr.right;
+        }
+        return curr;
+    }
+    */
 }
 
 /*

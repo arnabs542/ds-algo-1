@@ -3,69 +3,60 @@ package com.dsa.trees.ii;
 import com.dsa.trees.common.TreeNode;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 
 public class OddEvenLevels {
 
+    private int oddSum = 0;
+    private int evenSum = 0;
+
     public int solve(TreeNode A) {
-
-        ArrayList<ArrayList<Integer>> ans = levelOrder(A); //do level order traversal
-
-        int oddSum = 0;
-        int evenSum = 0;
-
-        //add to appropriate sum alternatively
-        for (int i = 0; i < ans.size(); i++) {
-
-            int sum = ans.get(i).stream().mapToInt(Integer::intValue).sum();
-
-            if (i % 2 == 0) {
-                oddSum += sum;
-            } else {
-                evenSum += sum;
-            }
-        }
-
+        levelOrder(A); //do level order traversal
         return oddSum - evenSum;
     }
 
-    private ArrayList<ArrayList<Integer>> levelOrder(TreeNode A) {
-
-        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+    private void levelOrder(TreeNode A) {
 
         if (A == null) {
-            return ans;
+            return;
         }
 
         TreeNode root = A;
 
-        Deque<TreeNode> deque = new ArrayDeque<>(); //keep adding to queue
+        Deque<TreeNode> deque = new ArrayDeque<>();
         deque.add(root);
         int size = 1;
 
-        ArrayList<Integer> level = new ArrayList<>(); //all nodes of one level
-
+        boolean reverse = false;
         while (!deque.isEmpty()) {
 
-            TreeNode parent = deque.pollFirst(); //for each pop, we are adding two more nodes to the queue
+            TreeNode parent;
 
-            //add left and right childs to queue
-            if (parent.left != null) {
-                deque.addLast(parent.left);
+            if (reverse) {
+                parent = deque.pollLast();
+                evenSum += parent.val;
+                if (parent.right != null) {
+                    deque.addFirst(parent.right);
+                }
+                if (parent.left != null) {
+                    deque.addFirst(parent.left);
+                }
+            } else {
+                parent = deque.pollFirst();
+                oddSum += parent.val;
+                if (parent.left != null) {
+                    deque.addLast(parent.left);
+                }
+                if (parent.right != null) {
+                    deque.addLast(parent.right);
+                }
             }
-            if (parent.right != null) {
-                deque.addLast(parent.right);
-            }
-            level.add(parent.val); //add current node to level array list
 
             if (--size == 0) {
-                ans.add(new ArrayList<>(level)); //add to the ans, when size is 0
-                level.clear(); //clear for reuse
-                size = deque.size(); //reset size to queue size
+                reverse = !reverse;
+                size = deque.size();
             }
         }
-        return ans;
     }
 }
 

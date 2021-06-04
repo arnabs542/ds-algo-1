@@ -2,28 +2,10 @@ package com.dsa.trees.iii;
 
 import com.dsa.trees.common.TreeNode;
 
-import java.util.Stack;
-
-public class ValidBinarySearchTree {
+public class ValidBST {
 
     public int isValidBST(TreeNode A) {
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode cur = A;
-        TreeNode prev = null;
-        while (cur != null || !stack.empty()) {
-            if (cur != null) {
-                stack.push(cur);
-                cur = cur.left;
-            } else {
-                TreeNode temp = stack.pop();
-                if (prev != null && prev.val >= temp.val) {
-                    return 0;
-                }
-                prev = temp;
-                cur = temp.right;
-            }
-        }
-        return 1;
+        return isBST(A).isBst ? 1 : 0;
     }
 
     private Pair<Boolean, Integer, Integer> isBST(TreeNode root) {
@@ -45,7 +27,6 @@ public class ValidBinarySearchTree {
         return new Pair<>(false, -1, -1); //if not a bst, i dont care about min/max
     }
 
-    // T -> isBst, U -> max of tree at node, V -> min of tree at node
     static class Pair<T, U, V> {
         T isBst;
         U max;

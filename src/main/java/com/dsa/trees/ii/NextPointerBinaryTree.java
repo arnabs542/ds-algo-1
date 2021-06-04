@@ -3,7 +3,6 @@ package com.dsa.trees.ii;
 import com.dsa.trees.common.TreeLinkNode;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 
 public class NextPointerBinaryTree {
@@ -19,47 +18,31 @@ public class NextPointerBinaryTree {
         if (A == null) {
             return;
         }
-
         TreeLinkNode root = A;
 
         Deque<TreeLinkNode> deque = new ArrayDeque<>(); //keep adding to queue
         deque.add(root);
-        int size = 1;
-
-        ArrayList<TreeLinkNode> level = new ArrayList<>(); //all nodes of one level
 
         while (!deque.isEmpty()) {
 
-            TreeLinkNode parent = deque.pollFirst(); //for each pop, we are adding two more nodes to the queue
+            int n = deque.size();
 
-            //add left and right childs to queue
-            if (parent.left != null) {
-                deque.addLast(parent.left);
-            }
-            if (parent.right != null) {
-                deque.addLast(parent.right);
-            }
-            level.add(parent); //add current node to level array list
-
-            if (--size == 0) {
-                updatePointersInLevel(level); //update next pointers in curr level
-                level.clear(); //clear for reuse
-                size = deque.size(); //reset size to queue size
+            for (int i = 0; i < n; i++) {
+                TreeLinkNode parent = deque.pollFirst();
+                if (i == n - 1) {
+                    parent.next = null;
+                } else {
+                    parent.next = deque.peekFirst();
+                }
+                //add left and right childs to queue
+                if (parent.left != null) {
+                    deque.addLast(parent.left);
+                }
+                if (parent.right != null) {
+                    deque.addLast(parent.right);
+                }
             }
         }
-    }
-
-    private void updatePointersInLevel(ArrayList<TreeLinkNode> level) {
-
-        TreeLinkNode prev = level.get(0); //first node in the level
-
-        int i = 1;
-        while (i < level.size()) {
-            TreeLinkNode next = level.get(i++); //next node in the level
-            prev.next = next; //point prev node to next node
-            prev = next; //update prev to next
-        }
-        prev.next = null; //point last node in the level to null
     }
 }
 

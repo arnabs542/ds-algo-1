@@ -9,7 +9,6 @@ public class SortedArrayToBalancedBST {
         if (A.length == 0) {
             return null;
         }
-
         return constructBST(0, A.length - 1, A);
     }
 

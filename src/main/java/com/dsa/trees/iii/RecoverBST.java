@@ -5,7 +5,7 @@ import com.dsa.trees.common.TreeNode;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class RecoverBinarySearchTree {
+public class RecoverBST {
 
     public int[] recoverTree(TreeNode A) {
 
