@@ -1,7 +1,5 @@
 package com.main;
 
-import com.dsa.graphs.v.TreeColoringWithThreeColors;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -30,13 +28,23 @@ public class Main {
 //        };
 //        m.solve(4, input);
 
-        TreeColoringWithThreeColors t = new TreeColoringWithThreeColors();
-        t.solve("22000");
+//        TreeColoringWithThreeColors t = new TreeColoringWithThreeColors();
+//        t.solve("22000");
+//
+//        AlternatePositiveNegativeElements a = new AlternatePositiveNegativeElements();
+//
+//        int[] inp = new int[]{-1, -2, -3, 4, 5};
+//        a.solve(inp);
+
+        int a = 6;
+        int b = -a;
+        int c = a & b;
+
+        System.out.println(Integer.toBinaryString(a));
+        System.out.println(Integer.toBinaryString(b));
+        System.out.println(Integer.toBinaryString(c));
     }
 }
-
-
-
 
 
 
