@@ -17,6 +17,7 @@ public class MaxAbsDiff {
             minMinus = Math.min(minMinus, A[i] - i);
             System.out.println();
         }
+
         return Math.max(maxPlus - minPlus, maxMinus - minMinus);
     }
 }

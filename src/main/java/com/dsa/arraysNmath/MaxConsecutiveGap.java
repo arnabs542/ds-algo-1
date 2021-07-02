@@ -14,19 +14,15 @@ public class MaxConsecutiveGap {
         int min = Integer.MAX_VALUE;
 
         for (int i = 0; i < A.length; i++) {
-            if (A[i] > max) {
-                max = A[i];
-            }
-            if (A[i] < min) {
-                min = A[i];
-            }
+            max = Math.max(max, A[i]);
+            min = Math.min(min, A[i]);
         }
 
         if (max == min) {
             return 0;
         }
 
-        float bucketSize = (float) (max - min) / (A.length - 1); //taking float ensures bucketSize is never 0
+        int bucketSize = (int) Math.ceil((double) (max - min) / (A.length - 1)); //taking ceil ensures bucketSize is never 0
 
         int[] bucketMin = new int[A.length];
         Arrays.fill(bucketMin, Integer.MAX_VALUE);
@@ -36,7 +32,7 @@ public class MaxConsecutiveGap {
 
         for (int i = 0; i < A.length; i++) {
 
-            int index = Math.round((A[i] - min) / bucketSize); // subtracting from min ensures index is never larger than the allocated size;
+            int index = (A[i] - min) / bucketSize; // subtracting from min ensures index is never larger than the allocated size;
             bucketMax[index] = Math.max(bucketMax[index], A[i]);
             bucketMin[index] = Math.min(bucketMin[index], A[i]);
         }
@@ -51,8 +47,7 @@ public class MaxConsecutiveGap {
             maxGap = Math.max(maxGap, bucketMin[i] - prevMax);
             prevMax = bucketMax[i];
         }
-
-        return Math.max(maxGap, max - prevMax);
+        return maxGap;
     }
 }
 

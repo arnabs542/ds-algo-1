@@ -6,9 +6,7 @@ public class ReadingNewspaper {
 
         int i = 0;
         while (A > 0) {
-            if (i > 6) {
-                i = 0;
-            }
+            i %= 7;
             A -= B[i++];
         }
         return i;

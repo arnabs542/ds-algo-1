@@ -41,7 +41,6 @@ public class NextPermutation {
 
         //Actually sorting not needed as all are in descending order, just swap and make them in ascending order
         swapAll(A, idx + 1, A.length - 1);
-
         return A;
     }
 
