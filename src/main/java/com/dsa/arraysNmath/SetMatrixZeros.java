@@ -53,7 +53,6 @@ public class SetMatrixZeros {
                 a.get(0).set(i, 0);
             }
         }
-
         // now check if first column has to be zero, if yes make all 0
         if (firstColumnZero) {
             for (int i = 0; i < rows; i++) {

@@ -41,7 +41,6 @@ public class MergeIntervals {
                 ans.add(intervals.get(i));
             }
         }
-
         //if newInterval not added even after all elements got traversed, meaning add it at the last
         if (!newIntervalAdded) {
             ans.add(newInterval);
@@ -71,11 +70,6 @@ public class MergeIntervals {
         int start;
         int end;
 
-        Interval() {
-            start = 0;
-            end = 0;
-        }
-
         Interval(int s, int e) {
             start = s;
             end = e;
@@ -83,8 +77,10 @@ public class MergeIntervals {
     }
 }
 
-
 /*
+
+Merge Intervals
+
 Problem Description
 
 Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
