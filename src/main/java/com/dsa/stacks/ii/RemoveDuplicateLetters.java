@@ -33,32 +33,3 @@ public class RemoveDuplicateLetters {
         return ans.toString();
     }
 }
-/*
-Remove Duplicate Letters
-Given a string A consisting of lowercase English alphabets. Find and return lexicographically smallest string B after removing duplicate letters from A so that every letter appears once and only once.
-
-
-Input Format
-
-The only argument given is string A.
-Output Format
-
-Return lexicographically smallest string B after removing duplicate letters from A.
-Constraints
-
-1 <= length of the string <= 200000
-A consists of lowercase English alphabets only.
-For Example
-
-Input 1:
-    A = "cbacdcbc"
-Output 1:
-    B = "acdb"
-
-Input 2:
-    A = "bcabc"
-Output 2:
-    B = "abc"
-
-
- */
